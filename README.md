@@ -45,7 +45,7 @@ git clone https://github.com/beuluis/atlassian-confluence-server.git
 ```sh
 docker-compose up --build
 ```
-3. Navigate to `localhost:8097`
+3. Navigate to `localhost:8098`
 4. Follow setup instructions
 
 Local db login information:
