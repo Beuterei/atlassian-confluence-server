@@ -1,0 +1,41 @@
+version: "3.7"
+services:
+    atlassian-confluence:
+        image: atlassian/confluence-server:7.7.2
+
+        deploy:
+            resources:
+              limits:
+                memory: 4G
+
+        networks:
+            - default
+
+        depends_on:
+            - postgres
+
+        restart: always
+
+        volumes:
+            - atlassianConfluenceData:/var/atlassian/application-data/confluence
+
+        environment:
+            JVM_MINIMUM_MEMORY: 1024m
+            JVM_MAXIMUM_MEMORY: 1024m
+            JVM_RESERVED_CODE_CACHE_SIZE: 256m
+
+    postgres:
+        image: postgres:10.14-alpine
+
+        networks:
+            - default
+
+        restart: always
+
+        volumes:
+            - ./databaseEntrypoint:/docker-entrypoint-initdb.d
+            - atlassianConfluencePostgresqlData:/var/lib/postgresql/data
+
+volumes:
+    atlassianConfluenceData: {}
+    atlassianConfluencePostgresqlData: {}

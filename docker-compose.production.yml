@@ -1,0 +1,40 @@
+# To be tested
+version: "3.7"
+services:
+    atlassian-confluence:
+        container_name: atlassianConfluenceProd
+
+        environment:
+            VIRTUAL_HOST: confluence.luisbeu.de
+            VIRTUAL_PORT: 7990
+            LETSENCRYPT_HOST: confluence.luisbeu.de
+            ATL_PROXY_NAME: confluence.luisbeu.de
+            ATL_PROXY_PORT: 443
+            ATL_TOMCAT_SECURE: 1
+
+            networks:
+                - default
+                - nginxproxynet
+
+        ports:
+            - 7990
+
+    postgres:
+        ports:
+            - 5432
+
+        container_name: atlassianConfluencePostgresqlProd
+
+        environment:
+            FORCE_COLOR: 1
+            POSTGRES_USER: atlassianConfluenceProd
+            POSTGRES_PASSWORD_FILE: /run/secrets/postgresPassword
+            POSTGRES_DB: atlassianConfluenceProd
+
+secrets:
+    postgresPassword:
+        external: true
+
+networks:
+    nginxproxynet:
+        external: true
