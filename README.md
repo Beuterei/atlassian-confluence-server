@@ -7,17 +7,19 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <h3 align="center">atlassian/confluence-server</h3>
+    <img src="https://wac-cdn.atlassian.com/dam/jcr:d6e2d2db-e58a-40f7-9d1a-d6d22a335c96/Confluence-blue.svg?cdnVersion=1209" alt="Logo" height="60">
 
-  <p align="center">
-    Docker setup for confluence-server
-    <br />
-    <br />
-    ·
-    <a href="https://github.com/beuluis/atlassian-confluence-server/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/beuluis/atlassian-confluence-server/issues">Request Feature</a>
-  </p>
+    <h3 align="center">atlassian/confluence-server</h3>
+
+    <p align="center">
+        Docker setup for confluence-server
+        <br />
+        <br />
+        ·
+        <a href="https://github.com/beuluis/atlassian-confluence-server/issues">Report Bug</a>
+        ·
+        <a href="https://github.com/beuluis/atlassian-confluence-server/issues">Request Feature</a>
+    </p>
 </p>
 
 <!-- ABOUT THE PROJECT -->
