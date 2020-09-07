@@ -28,7 +28,7 @@
 Small docker setup for confluence-server. The production environment also uses [jwilder/nginx-proxy](https://github.com/nginx-proxy/nginx-proxy) and [nginx-proxy/docker-letsencrypt-nginx-proxy-companion](https://github.com/nginx-proxy/docker-letsencrypt-nginx-proxy-companion).
 
 <!-- GETTING STARTED -->
-## Getting Started Local
+## Getting Started Develop
 
 To get a local copy up and running follow these simple steps.
 
@@ -50,18 +50,72 @@ docker-compose up --build
 3. Navigate to `localhost:8098`
 4. Follow setup instructions
 
-Local db login information:
+### Customization
 
-DB: `atlassianConfluenceDev`
+1. Create a `.env` file
+```sh
+touch .env
+```
+2. Overwrite variables as you like (format: `{variable name}={variable value}`)
 
-User: `atlassianConfluenceDev`
+| Variable | Description | Default value | Required |
+| --- | --- | --- | --- |
+| `CONFLUENCE_MEMORY` | Defines how much memory the container can use | `4G` | false |
+| `CONFLUENCE_JVM_MINIMUM_MEMORY` | The minimum heap size of the JVM | `1024m` | false |
+| `CONFLUENCE_JVM_MAXIMUM_MEMORY` | The maximum heap size of the JVM | `1024m` | false |
+| `CONFLUENCE_JVM_RESERVED_CODE_CACHE_SIZE` | The reserved code cache size of the JVM | `256m` | false |
+| `PORT` | Which port is mapped to your host machine | `8098` | false |
+| `PG_DB` | Postgres DB name | `atlassianConfluenceDev` | false |
+| `PG_USER` | Postgres user | `atlassianConfluenceDev` | false |
+| `PG_PASSWORD` | Postgres password | `966VHT7SUcPnaqpJAz32fP` | false |
 
-Password: `966VHT7SUcPnaqpJAz32fP`
 
+## Getting Started Production
 
-### Production
+To get a copy up and running follow these simple steps.
 
-The production environment is still being worked on. Under `docker-compose.production.yml` you can find an example for my setup. Feel free to fork it and change the setup for yourself
+### Prerequisites
+
+* [Docker](https://docs.docker.com/get-docker/)
+* [Docker Compose](https://docs.docker.com/compose/install/)
+* [Nginx by me](https://github.com/beuluis/nginx)
+
+### Installation
+
+1. Clone the repo
+```sh
+git clone https://github.com/beuluis/atlassian-confluence-server.git --branch master
+```
+2. Create a `.env.prod` file
+```sh
+touch .env.prod
+```
+3. Overwrite all variables marked under Customization as required
+4. Start docker-compose
+```sh
+docker-compose --env-file ./.env.prod -f docker-compose.yml -f docker-compose.production.yml up -d
+```
+5. Navigate to `https://{your-host}`
+6. Follow setup instructions
+
+### Customization
+
+1. Create a `.env.prod` file
+```sh
+touch .env.prod
+```
+2. Overwrite variables as you like (format: `{variable name}={variable value}`)
+
+| Variable | Description | Default value | Required |
+| --- | --- | --- | --- |
+| `CONFLUENCE_MEMORY` | Defines how much memory the container can use | `4G` | false |
+| `CONFLUENCE_JVM_MINIMUM_MEMORY` | The minimum heap size of the JVM | `1024m` | false |
+| `CONFLUENCE_JVM_MAXIMUM_MEMORY` | The maximum heap size of the JVM | `1024m` | false |
+| `CONFLUENCE_JVM_RESERVED_CODE_CACHE_SIZE` | The reserved code cache size of the JVM | `256m` | false |
+| `HOST` | Host which your container should be accessible. E.g. `test.com` | none | true |
+| `PG_DB` | Postgres DB name | `atlassianConfluenceProd` | false |
+| `PG_USER` | Postgres user | `atlassianConfluenceProd` | false |
+| `PG_PASSWORD` | Postgres password | none | true |
 
 <!-- CONTRIBUTING -->
 ## Contributing

@@ -5,13 +5,13 @@ services:
 
         environment:
             FORCE_COLOR: 1
-            ATL_JDBC_URL: jdbc:postgresql://postgres:5432/atlassianConfluenceDev
-            ATL_JDBC_USER: atlassianConfluenceDev
-            ATL_JDBC_PASSWORD: 966VHT7SUcPnaqpJAz32fP
+            ATL_JDBC_URL: jdbc:postgresql://postgres:5432/${PG_DB-atlassianConfluenceDev}
+            ATL_JDBC_USER: ${PG_USER-atlassianConfluenceDev}
+            ATL_JDBC_PASSWORD: ${PG_PASSWORD-966VHT7SUcPnaqpJAz32fP}
             ATL_DB_TYPE: postgresql
 
         ports:
-            - 8098:8090
+            - ${PORT-8098}:8090
 
     postgres:
         ports:
@@ -21,6 +21,6 @@ services:
 
         environment:
             FORCE_COLOR: 1
-            POSTGRES_USER: atlassianConfluenceDev
-            POSTGRES_PASSWORD: 966VHT7SUcPnaqpJAz32fP
-            POSTGRES_DB: atlassianConfluenceDev
+            POSTGRES_USER: ${PG_USER-atlassianConfluenceDev}
+            POSTGRES_PASSWORD: ${PG_PASSWORD-966VHT7SUcPnaqpJAz32fP}
+            POSTGRES_DB: {PG_DB-atlassianConfluenceDev}

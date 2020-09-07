@@ -5,12 +5,16 @@ services:
         container_name: atlassianConfluenceProd
 
         environment:
-            VIRTUAL_HOST: confluence.luisbeu.de
+            VIRTUAL_HOST: ${HOST:?Missing environment variable see readme}
             VIRTUAL_PORT: 7990
-            LETSENCRYPT_HOST: confluence.luisbeu.de
-            ATL_PROXY_NAME: confluence.luisbeu.de
+            LETSENCRYPT_HOST: ${HOST:?Missing environment variable see readme}
+            ATL_PROXY_NAME: ${HOST:?Missing environment variable see readme}
             ATL_PROXY_PORT: 443
             ATL_TOMCAT_SECURE: 1
+            ATL_JDBC_URL: jdbc:postgresql://postgres:5432/$${PG_DB-atlassianConfluenceProd}
+            ATL_JDBC_USER: ${PG_USER-atlassianConfluenceProd}
+            ATL_JDBC_PASSWORD: ${PG_PASSWORD:?Missing environment variable see readme}
+            ATL_DB_TYPE: postgresql
 
             networks:
                 - default
@@ -27,13 +31,9 @@ services:
 
         environment:
             FORCE_COLOR: 1
-            POSTGRES_USER: atlassianConfluenceProd
-            POSTGRES_PASSWORD_FILE: /run/secrets/postgresPassword
-            POSTGRES_DB: atlassianConfluenceProd
-
-secrets:
-    postgresPassword:
-        external: true
+            POSTGRES_USER: ${PG_USER-atlassianConfluenceProd}
+            POSTGRES_PASSWORD: ${PG_PASSWORD:?Missing environment variable see readme}
+            POSTGRES_DB: ${PG_DB-atlassianConfluenceProd}
 
 networks:
     nginxproxynet:
