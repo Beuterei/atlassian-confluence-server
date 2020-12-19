@@ -37,5 +37,7 @@ services:
             - atlassianConfluencePostgresqlData:/var/lib/postgresql/data
 
 volumes:
-    atlassianConfluenceData: {}
-    atlassianConfluencePostgresqlData: {}
+    atlassianConfluenceData:
+        driver: local
+    atlassianConfluencePostgresqlData:
+        driver: local
